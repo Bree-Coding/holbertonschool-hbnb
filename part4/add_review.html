@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Review</title>
+    <link rel="icon" href="images/icon.png" type="image/png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="images/logo.png" alt="HBNB Logo" class="logo">
+        <nav>
+            <a href="index.html">Home</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Add Your Review</h2>
+
+        <!-- Formulaire START -->
+        <form id="review-form" class="review-form">
+            <div class="rating">
+                <label for="rating">Rating:</label>
+                <div class="hearts">
+                    <div class="heart" data-value="1">❤</div>
+                    <div class="heart" data-value="2">❤</div>
+                    <div class="heart" data-value="3">❤</div>
+                    <div class="heart" data-value="4">❤</div>
+                    <div class="heart" data-value="5">❤</div>
+                </div>
+                
+            </div>
+            <textarea id="review-text" class="write-review" placeholder="Write your review here..." required></textarea>
+
+            <button type="submit" id="submit-button" class="submit-review">Submit Review</button>
+        </form>
+        <!-- Formulaire END -->
+    </main>
+
+    <footer>
+        <p>&copy; 2025 HBnB Evolution All rights reserved.</p>
+    </footer>
+    <script src="scripts.js"></script>
+</body>
+</html>
