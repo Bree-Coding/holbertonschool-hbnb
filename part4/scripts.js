@@ -271,7 +271,7 @@ function displayPlaceDetails(place) {
 const placeImageMapping = {
     "b002f7e3-8dbd-4422-a677-4810b1fff34a": ["Pastel House front.jpg", "Pastel House living room.png", "Pastel House bedroom.png",
     "Pastel House kitchen.png", "Pastel House dining corner.png", "Pastel_House_bathroom.png", "Pastel House balcony.png"],
-    "45897b67-da31-4cde-a6ca-ee3403b39166": ["Minimal House front.jpg", "Minimalist House living room.png", "Minimal House bedroom.jpg", "Minimal House kitchen.jpg", "Minimal House bathroom.jpg"],
+    "45897b67-da31-4cde-a6ca-ee3403b39166": ["Minimal House front.jpg", "Minimalist House living room.png", "Minimal House bedroom.png", "Minimal House kitchen.jpg", "Minimal House bathroom.jpg"],
     "a84515d4-8169-479a-b150-99e5a3bdca24": ["Green House front.jpg", "Green House living room.jpg", "Green House bedroom.jpg", "Green House kitchen.jpg", "Green House bathroom.jpg"],
     "9d8e44a7-a85d-45b8-b4fe-54e8781dbace": ["Pink House front.jpg", "Pink House living room.jpg", "Pink House bedroom.jpg", "Pink House kitchen.png", "Pink House dining corner.png", "Pink House bathroom.jpg"]
 };
