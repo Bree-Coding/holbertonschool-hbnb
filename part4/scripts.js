@@ -2,6 +2,7 @@
  * 1. Login, Authentication & Cookies
  * ============================= **/
 
+
 // Setup the login form to send credentials and store token
 function setupLoginForm() {
     const loginForm = document.getElementById('login-form');
@@ -59,9 +60,11 @@ function getCookie(name) {
     return match ? match[2] : null;
 }
 
+
 /** =============================
  * 2. Places (List, Filter, View)
  * ============================= **/
+
 
 // Fetch all places from the API
 async function fetchPlaces() {
@@ -88,8 +91,7 @@ function displayPlaces(places) {
     places.forEach(place => {
         const placeCard = document.createElement('div');
         placeCard.className = 'place-card';
-        
-        // Add place image
+
         const imgElement = document.createElement('img');
         imgElement.src = `places_images/${imageMapping[place.id] || 'default.jpg'}`;
         imgElement.alt = `Image of ${place.title}`;
@@ -160,7 +162,6 @@ function setupSearchForm() {
     });
 }
 
-
 // Fetch place detail info by ID
 async function fetchPlaceDetails(placeId) {
     try {
@@ -175,6 +176,8 @@ async function fetchPlaceDetails(placeId) {
     }
 }
 
+
+// Extract place ID from the current URL
 function getPlaceIdByUrl() {
     const urlParams = new URLSearchParams(window.location.search);
     const placeId = urlParams.get('id') || null; // Évite une valeur undefined
@@ -190,13 +193,10 @@ function displayPlaceDetails(place) {
 
     const placeImages = placeImageMapping[place.id] || ['default.jpg'];
 
-    // 1. Vider la section
     section.innerHTML = '';
 
-    // 2. Création du conteneur global
     const container = document.createElement('div');
 
-    // 3. Création du carrousel
     const carouselWrapper = document.createElement('div');
     carouselWrapper.className = 'carousel-wrapper';
 
@@ -224,7 +224,6 @@ function displayPlaceDetails(place) {
     carouselContainer.appendChild(nextButton);
     carouselWrapper.appendChild(carouselContainer);
 
-    // 4. Création du bloc de détails
     const detailsDiv = document.createElement('div');
     detailsDiv.className = 'place-info';
 
@@ -241,12 +240,10 @@ function displayPlaceDetails(place) {
     detailsDiv.appendChild(description);
     detailsDiv.appendChild(price);
 
-    // 5. Ajout des éléments dans la section
     container.appendChild(carouselWrapper);
     container.appendChild(detailsDiv);
     section.appendChild(container);
 
-    // 6. Carrousel - logique des boutons
     let currentImageIndex = 0;
 
     prevButton.addEventListener('click', () => {
@@ -271,7 +268,7 @@ function displayPlaceDetails(place) {
 const placeImageMapping = {
     "b002f7e3-8dbd-4422-a677-4810b1fff34a": ["Pastel House front.jpg", "Pastel House living room.png", "Pastel House bedroom.png",
     "Pastel House kitchen.png", "Pastel House dining corner.png", "Pastel_House_bathroom.png", "Pastel House balcony.png"],
-    "45897b67-da31-4cde-a6ca-ee3403b39166": ["Minimal House front.jpg", "Minimalist House living room.png", "Minimal House bedroom.png", "Minimal House kitchen.jpg", "Minimal House bathroom.jpg"],
+    "45897b67-da31-4cde-a6ca-ee3403b39166": ["Minimal House front.jpg", "Minimalist House living room.jpg", "Minimal House bedroom.jpg", "Minimal House kitchen.jpg", "Minimal House bathroom.jpg"],
     "a84515d4-8169-479a-b150-99e5a3bdca24": ["Green House front.jpg", "Green House living room.jpg", "Green House bedroom.jpg", "Green House kitchen.jpg", "Green House bathroom.jpg"],
     "9d8e44a7-a85d-45b8-b4fe-54e8781dbace": ["Pink House front.jpg", "Pink House living room.jpg", "Pink House bedroom.jpg", "Pink House kitchen.png", "Pink House dining corner.png", "Pink House bathroom.jpg"]
 };
@@ -297,9 +294,11 @@ function createIcon(src, alt) {
     return icon;
 }
 
+
 /** =============================
  * 3. Reviews (View & Add)
  * ============================= **/
+
 
 // Fetch all reviews for a place
 async function fetchReviews(placeId) {
@@ -358,19 +357,17 @@ function setupReviewForm(placeId, token, reviewText, rating) {
 }
 
 function setupRatingSystem() {
-    const ratings = document.querySelectorAll('.rating'); // Sélectionner toutes les sections de notation
+    const ratings = document.querySelectorAll('.rating');
 
     ratings.forEach(rating => {
-        const hearts = rating.querySelectorAll('.heart'); // Récupérer les cœurs dans chaque section
+        const hearts = rating.querySelectorAll('.heart');
 
         hearts.forEach(heart => {
             heart.addEventListener('click', function() {
-                const value = parseInt(this.getAttribute('data-value')); // Obtenir la valeur du cœur cliqué
+                const value = parseInt(this.getAttribute('data-value'));
 
-                // Réinitialiser tous les cœurs avant de sélectionner
                 hearts.forEach(h => h.classList.remove('selected'));
 
-                // Sélectionner tous les cœurs jusqu'à celui cliqué
                 for (let i = 0; i < value; i++) {
                     hearts[i].classList.add('selected');
                 }
@@ -402,20 +399,22 @@ async function submitReview(placeId, token, reviewText) {
         const responseData = await response.json();
         console.log('Avis soumis avec succès:', responseData);
 
-        // Recharger la section des avis après la soumission
         fetchReviews(placeId);
     } catch (error) {
         console.error('Erreur lors de la soumission de l\'avis:', error);
     }
 }
 
+
 /** =============================
  * DOM Initialization
  * ============================= **/
-document.addEventListener('DOMContentLoaded', async () => {
-    const currentPage = window.location.pathname; // Identifier la page en cours
 
-    // Index.html : Charger et afficher les lieux
+
+document.addEventListener('DOMContentLoaded', async () => {
+    const currentPage = window.location.pathname;
+
+    // Index.html
     if (currentPage.includes('index.html') || currentPage.includes('(index)')) {
         const places = await fetchPlaces();
         if (places.length) displayPlaces(places);
@@ -423,7 +422,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         setupSearchForm(places);
     }
 
-    // Place.html :
+    // Place.html
     else if (currentPage.includes('place.html')) {
         const placeId = getPlaceIdByUrl();
         const addReviewButton = document.getElementById('add-review-button');
@@ -435,13 +434,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
         if (addReviewButton && placeId) {
             addReviewButton.addEventListener('click', () => {
-                // Rediriger vers add_review.html avec l'ID de la place dans l'URL
                 window.location.href = `add_review.html?id=${placeId}`;
             });
         }
     }
 
-    // Add_review.html : Page d'ajout d'avis
+    // Add_review.html
     else if (currentPage.includes('add_review.html')) {
         const token = checkAuthentication(); // Vérifier l'authentification
         const submitButton = document.getElementById('submit-button');
@@ -449,11 +447,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         const placeData = await fetchPlaceDetails(placeId);
         const placeReview = await fetchReviews(placeId);
         if (!token) {
-            // Si l'utilisateur n'est pas authentifié, rediriger vers la page de login
             if (submitButton) {
                 submitButton.addEventListener('click', (event) => {
-                    event.preventDefault(); // Empêcher la soumission du formulaire
-                    window.location.href = 'login.html'; // Rediriger vers la page de login
+                    event.preventDefault();
+                    window.location.href = 'login.html';
                 });
             }
             else {
@@ -466,7 +463,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
 
-    // Login.html : Configurer le formulaire de connexion
+    // Login.html:
     else if (currentPage.includes('login.html')) {
         setupLoginForm();
     }
